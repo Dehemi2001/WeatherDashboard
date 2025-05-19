@@ -62,6 +62,7 @@ artifacts/
 .DS_Store
 .AppleDouble
 .LSOverride
+publish
 
 # Misc
 *.swp
