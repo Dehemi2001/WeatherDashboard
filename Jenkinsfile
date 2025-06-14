@@ -15,30 +15,30 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'dotnet build ${DOTNET_PROJECT} --configuration Release'
+                bat 'dotnet build %DOTNET_PROJECT% --configuration Release'
             }
         }
         stage('Test') {
             steps {
-                sh 'dotnet test WeatherDashboard.Tests/WeatherDashboard.Tests.csproj --no-build --verbosity normal'
+                bat 'dotnet test WeatherDashboard.Tests/WeatherDashboard.Tests.csproj --no-build --verbosity normal'
             }
         }
         stage('Publish') {
             steps {
-                sh 'dotnet publish ${DOTNET_PROJECT} --configuration Release --output publish'
+                bat 'dotnet publish %DOTNET_PROJECT% --configuration Release --output publish'
             }
         }
         stage('Docker Build') {
             steps {
-                sh 'docker build -t ${IMAGE_NAME} .'
+                bat 'docker build -t %IMAGE_NAME% .'
             }
         }
         stage('Docker Run') {
             steps {
                 // Stop and remove any existing container
-                sh '''
-                    docker rm -f ${CONTAINER_NAME} || true
-                    docker run -d --name ${CONTAINER_NAME} -p 80:80 ${IMAGE_NAME}
+                bat '''
+                    docker rm -f %CONTAINER_NAME%
+                    docker run -d --name %CONTAINER_NAME% -p 80:80 %IMAGE_NAME%
                 '''
             }
         }
