@@ -20,7 +20,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                bat 'dotnet test WeatherDashboard.Tests/WeatherDashboard.Tests.csproj --no-build --configuration Release --verbosity normal'
+                bat 'dotnet test WeatherDashboard.Tests/WeatherDashboard.Tests.csproj --configuration Release --verbosity normal'
             }
         }
         stage('Publish') {
